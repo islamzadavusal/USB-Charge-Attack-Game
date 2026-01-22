@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -195,87 +196,104 @@ private fun StartScreen(onStartClick: () -> Unit) {
         label = "glow"
     )
 
+    val buttonPulse by infiniteTransition.animateFloat(
+        initialValue = 0.95f,
+        targetValue = 1.05f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulse"
+    )
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(32.dp)
+            modifier = Modifier.padding(horizontal = 24.dp)
         ) {
             // Epic title with glow
             Text(
-                text = "⚡ USB CHARGE",
-                fontSize = 48.sp,
+                text = "USB CHARGE",
+                fontSize = 32.sp,
                 fontWeight = FontWeight.Black,
                 color = Color(0xFF00F5FF),
                 style = LocalTextStyle.current.copy(
                     shadow = androidx.compose.ui.graphics.Shadow(
                         color = Color(0xFF00F5FF).copy(alpha = titleGlow),
-                        blurRadius = 30f
+                        blurRadius = 25f
                     )
                 ),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                lineHeight = 36.sp
             )
+
+            Spacer(modifier = Modifier.height(4.dp))
 
             Text(
                 text = "ATTACK",
-                fontSize = 52.sp,
+                fontSize = 38.sp,
                 fontWeight = FontWeight.Black,
                 color = Color(0xFFFF6B00),
                 style = LocalTextStyle.current.copy(
                     shadow = androidx.compose.ui.graphics.Shadow(
                         color = Color(0xFFFF6B00).copy(alpha = titleGlow),
-                        blurRadius = 30f
+                        blurRadius = 25f
                     )
                 ),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.offset(y = (-10).dp)
+                lineHeight = 42.sp
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             // Instructions card
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF1A1F3A).copy(alpha = 0.8f)
+                    containerColor = Color(0xFF1A1F3A).copy(alpha = 0.7f)
                 ),
                 modifier = Modifier
-                    .padding(horizontal = 24.dp)
+                    .padding(horizontal = 16.dp)
                     .border(
                         width = 1.dp,
                         brush = Brush.linearGradient(
                             colors = listOf(
-                                Color(0xFF00F5FF).copy(alpha = 0.5f),
-                                Color(0xFFFF6B00).copy(alpha = 0.5f)
+                                Color(0xFF00F5FF).copy(alpha = 0.4f),
+                                Color(0xFFFF6B00).copy(alpha = 0.4f)
                             )
                         ),
-                        shape = RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(12.dp)
                     )
             ) {
                 Column(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     InstructionRow("📱", "Tilt phone to move")
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     InstructionRow("🔌", "Plug charger to shoot")
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     InstructionRow("🎯", "Destroy all enemies!")
                 }
             }
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(40.dp))
 
-            // Epic start button
+            // Epic start button with pulse animation
             Button(
                 onClick = onStartClick,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent
                 ),
                 modifier = Modifier
-                    .height(64.dp)
-                    .widthIn(min = 200.dp)
+                    .height(56.dp)
+                    .width(220.dp)
+                    .graphicsLayer {
+                        scaleX = buttonPulse
+                        scaleY = buttonPulse
+                    }
                     .background(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
@@ -284,21 +302,34 @@ private fun StartScreen(onStartClick: () -> Unit) {
                                 Color(0xFFFF6B00)
                             )
                         ),
-                        shape = RoundedCornerShape(32.dp)
+                        shape = RoundedCornerShape(28.dp)
                     )
                     .border(
                         width = 2.dp,
                         color = Color.White.copy(alpha = 0.3f),
-                        shape = RoundedCornerShape(32.dp)
+                        shape = RoundedCornerShape(28.dp)
                     ),
                 contentPadding = PaddingValues(0.dp)
             ) {
-                Text(
-                    "START MISSION",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        "▶",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        "START MISSION",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        letterSpacing = 1.sp
+                    )
+                }
             }
         }
     }
@@ -312,12 +343,12 @@ private fun InstructionRow(icon: String, text: String) {
     ) {
         Text(
             text = icon,
-            fontSize = 24.sp,
-            modifier = Modifier.width(40.dp)
+            fontSize = 20.sp,
+            modifier = Modifier.width(36.dp)
         )
         Text(
             text = text,
-            fontSize = 16.sp,
+            fontSize = 15.sp,
             color = Color.White.copy(alpha = 0.9f),
             fontWeight = FontWeight.Medium
         )
