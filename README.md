@@ -18,7 +18,11 @@
 A space shooter game with a twist - you control your ship by tilting your phone (gyroscope), and fire weapons by plugging in your USB charger. Turn a boring charging routine into an epic battle!
 
 ### Demo
-> Add gameplay GIF here
+> 
+
+https://github.com/user-attachments/assets/71043727-eceb-47f0-bf8d-57cb2dc304d8
+
+
 
 ---
 
@@ -197,7 +201,9 @@ MIT License - feel free to use this project for learning or building upon.
 ## 👨‍💻 Author
 
 **Islamzada**
-- GitHub: [@islamzada](https://github.com/islamzada)
+- GitHub: [@islamzadavusal](https://github.com/islamzadavusal)
+- Linkedin: [@islamzada](https://www.linkedin.com/in/islamzada/)
+- Email: vusalislamzada.dev@gmail.com
 
 ---
 
