@@ -20,9 +20,7 @@ A space shooter game with a twist - you control your ship by tilting your phone 
 ### Demo
 > 
 
-https://github.com/user-attachments/assets/71043727-eceb-47f0-bf8d-57cb2dc304d8
-
-
+https://github.com/user-attachments/assets/5addc09d-ec5d-4280-97f0-61fc0c55270e
 
 ---
 
