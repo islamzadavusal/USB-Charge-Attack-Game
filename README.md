@@ -107,7 +107,7 @@ com.islamzada.usbchargeattack/
 
 ```bash
 git clone https://github.com/islamzadavusal/USB-Charge-Attack-Game.git
-cd usb-charge-attack
+cd usb-charge-attack-game
 ./gradlew installDebug
 ```
 
